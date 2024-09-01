@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using UniversityAPI.Models;
 
 namespace UniversityAPI.Context;
 
@@ -9,4 +10,5 @@ public class AppDbContext : DbContext
 
     }
 
+    public DbSet<Studant>? Studants { get; set; }
 }
