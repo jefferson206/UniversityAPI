@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace UniversityAPI.Models;
 
@@ -26,6 +27,6 @@ public class Course
 
     [Required]
     public float price { get; set; }
-
+    [JsonIgnore]
     public ICollection<ClassSubject> ClassSubjects { get; set; }
 }

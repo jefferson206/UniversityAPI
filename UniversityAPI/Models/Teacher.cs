@@ -10,8 +10,10 @@ public class Teacher : Person
     [Required]
     [EmailAddress]
     public string? Email { get; set; }
+    [Required]
     public string? Telephone { get; set; }
-    public IEnumerable<string>? Certificates { get; set; }
+    [Required]
+    public List<string>? Certificates { get; set; }
     
     [Required]
     public float paymentHoursPrice { get; set; }
