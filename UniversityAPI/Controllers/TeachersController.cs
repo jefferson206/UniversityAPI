@@ -27,7 +27,7 @@ namespace UniversityAPI.Controllers
             return await _context.Teacher.ToListAsync();
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int:min(1)}")]
         public async Task<ActionResult<Teacher>> GetTeacher(int id)
         {
             var teacher = await _context.Teacher.FindAsync(id);
@@ -40,7 +40,7 @@ namespace UniversityAPI.Controllers
             return teacher;
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{id:int:min(1)}")]
         public async Task<IActionResult> PutTeacher(int id, Teacher teacher)
         {
             if (id != teacher.TeacherId)
@@ -78,7 +78,7 @@ namespace UniversityAPI.Controllers
             return CreatedAtAction("GetTeacher", new { id = teacher.TeacherId }, teacher);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:int:min(1)}")]
         public async Task<IActionResult> DeleteTeacher(int id)
         {
             var teacher = await _context.Teacher.FindAsync(id);

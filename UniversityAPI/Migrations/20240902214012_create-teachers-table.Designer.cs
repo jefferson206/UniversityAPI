@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UniversityAPI.Context;
 
@@ -11,9 +12,11 @@ using UniversityAPI.Context;
 namespace UniversityAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240902214012_create-teachers-table")]
+    partial class createteacherstable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,61 +24,6 @@ namespace UniversityAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
-
-            modelBuilder.Entity("UniversityAPI.Models.ClassSubject", b =>
-                {
-                    b.Property<int>("ClassSubjectId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("ClassSubjectId"));
-
-                    b.Property<int>("CourseId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Subject")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("TeacherId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ClassSubjectId");
-
-                    b.HasIndex("CourseId");
-
-                    b.HasIndex("TeacherId");
-
-                    b.ToTable("ClassSubject");
-                });
-
-            modelBuilder.Entity("UniversityAPI.Models.Course", b =>
-                {
-                    b.Property<int>("CourseId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("CourseId"));
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(300)
-                        .HasColumnType("varchar(300)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
-
-                    b.Property<int>("hours")
-                        .HasColumnType("int");
-
-                    b.Property<float>("price")
-                        .HasColumnType("float");
-
-                    b.HasKey("CourseId");
-
-                    b.ToTable("Course");
-                });
 
             modelBuilder.Entity("UniversityAPI.Models.Studant", b =>
                 {
@@ -128,7 +76,6 @@ namespace UniversityAPI.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("Certificates")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<DateTime>("DateOfBirth")
@@ -150,7 +97,6 @@ namespace UniversityAPI.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("Telephone")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<float>("paymentHoursPrice")
@@ -159,30 +105,6 @@ namespace UniversityAPI.Migrations
                     b.HasKey("TeacherId");
 
                     b.ToTable("Teacher");
-                });
-
-            modelBuilder.Entity("UniversityAPI.Models.ClassSubject", b =>
-                {
-                    b.HasOne("UniversityAPI.Models.Course", "Course")
-                        .WithMany("ClassSubjects")
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("UniversityAPI.Models.Teacher", "Teacher")
-                        .WithMany()
-                        .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Course");
-
-                    b.Navigation("Teacher");
-                });
-
-            modelBuilder.Entity("UniversityAPI.Models.Course", b =>
-                {
-                    b.Navigation("ClassSubjects");
                 });
 #pragma warning restore 612, 618
         }
