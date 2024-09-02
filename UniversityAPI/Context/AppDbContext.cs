@@ -11,4 +11,6 @@ public class AppDbContext : DbContext
     }
 
     public DbSet<Studant>? Studants { get; set; }
+    public DbSet<Teacher>? Teacher { get; set; }
+
 }
