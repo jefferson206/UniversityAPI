@@ -1,9 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace UniversityAPI.Models;
 
 public class Course
 {
+
+    public Course()
+    {
+        ClassSubjects = new Collection<ClassSubject>();
+    }
+
     [Key]
     public int CourseId { get; set; }
     
@@ -15,9 +22,10 @@ public class Course
     public string? Description { get; set; }
 
     [Required]
-    public int hours{ get; set; }
+    public int hours { get; set; }
 
     [Required]
     public float price { get; set; }
 
+    public ICollection<ClassSubject> ClassSubjects { get; set; }
 }
