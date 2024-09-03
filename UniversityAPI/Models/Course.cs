@@ -27,6 +27,5 @@ public class Course
 
     [Required]
     public float price { get; set; }
-    [JsonIgnore]
-    public ICollection<ClassSubject> ClassSubjects { get; set; }
+    public ICollection<ClassSubject>? ClassSubjects { get; set; }
 }
