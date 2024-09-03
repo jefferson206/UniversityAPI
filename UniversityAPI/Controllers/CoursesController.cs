@@ -21,18 +21,18 @@ namespace UniversityAPI.Controllers
             _context = context;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Course>>> GetCourse()
-        {
-            return await _context.Course.ToListAsync();
-        }
-
         [HttpGet("/classSubject")]
         public async Task<ActionResult<IEnumerable<Course>>> GetCoursesWithClassSubject()
         {
             return await _context.Course.Include(c => c.ClassSubjects).AsNoTracking().ToListAsync();
         }
 
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Course>>> GetCourse()
+        {
+            return await _context.Course.ToListAsync();
+        }
 
         [HttpGet("{id:int:min(1)}")]
         public async Task<ActionResult<Course>> GetCourse(int id)
